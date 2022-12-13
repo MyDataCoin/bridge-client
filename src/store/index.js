@@ -3,8 +3,8 @@ import { auth } from './auth.module'
 
 export default createStore({
   state: {
-    AUTH_API_URI: 'https://mdc-client-api.azurewebsites.net/api/v1',
-    API_URI: 'https://mdc-client-api.azurewebsites.net/api/v1',
+    AUTH_API_URI: 'https://api.mydatacoin.io/api/v1',
+    API_URI: 'https://bridge.mydatacoin.io/api/v1',
     sidebarVisible: '',
     sidebarUnfoldable: false,
   },
