@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const instance = axios.create({
-  baseURL: 'https://mydatacoinbridge.azurewebsites.net/api/v1',
+  baseURL: 'https://bridge.mydatacoin.io/api/v1',
   headers: {
     'Content-Type': 'application/json',
   },
