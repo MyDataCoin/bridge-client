@@ -4,19 +4,17 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    aliasOf: 'Главная',
+    name: 'Главная',
     component: () => import('@/layouts/DefaultLayout'),
-    redirect: '/dashboard',
+    redirect: '/profile',
     children: [
       {
-        path: '/dashboard',
-        name: 'Dashboard',
-        nameRu: 'Статистика',
+        path: '/profile',
+        name: 'Профиль',
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import('@/views/Dashboard.vue'),
+        component: () => import('@/views/profile/Main.vue'),
       },
       {
         path: '/test',
@@ -29,7 +27,7 @@ const routes = [
   {
     path: '/pages',
     redirect: '/pages/404',
-    name: 'Pages',
+    name: 'Настройки',
     component: {
       render() {
         return h(resolveComponent('router-view'))
@@ -38,22 +36,22 @@ const routes = [
     children: [
       {
         path: '404',
-        name: 'Page404',
+        name: 'Страница не найдена',
         component: () => import('@/views/pages/Page404'),
       },
       {
         path: 'login',
-        name: 'Login',
+        name: 'Вход',
         component: () => import('@/views/pages/Login'),
       },
       {
         path: '500',
-        name: 'Page500',
+        name: 'Ошибка сервера',
         component: () => import('@/views/pages/Page500'),
       },
       {
         path: 'register',
-        name: 'Register',
+        name: 'Регистрация',
         component: () => import('@/views/pages/Register'),
       },
     ],

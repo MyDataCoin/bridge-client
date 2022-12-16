@@ -79,7 +79,7 @@ async function handleLogin() {
   loading.value = true
   const resp = await store.dispatch('auth/login', model)
   if (resp.code === 200) {
-    router.push({ name: 'Home' })
+    router.push({ name: 'Главная' })
   }
 
   loading.value = false
@@ -107,7 +107,7 @@ async function receiveCode() {
 
 onMounted(() => {
   if (loggedIn.value) {
-    router.push({ name: 'Home' })
+    router.push({ name: 'Главная' })
   }
 })
 </script>

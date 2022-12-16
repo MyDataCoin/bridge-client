@@ -13,7 +13,7 @@ export const auth = {
     login({ commit }, model) {
       return AuthService.login(model).then(
         (response) => {
-          commit('loginSuccess', response.tokens)
+          commit('loginSuccess', response)
           return Promise.resolve(response)
         },
         (error) => {
