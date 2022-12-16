@@ -45,14 +45,14 @@ const routes = [
         component: () => import('@/views/pages/Login'),
       },
       {
+        path: 'registration',
+        name: 'Регистрация',
+        component: () => import('@/views/pages/Registration'),
+      },
+      {
         path: '500',
         name: 'Ошибка сервера',
         component: () => import('@/views/pages/Page500'),
-      },
-      {
-        path: 'register',
-        name: 'Регистрация',
-        component: () => import('@/views/pages/Register'),
       },
     ],
   },
@@ -68,7 +68,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const publicPages = ['/pages/login']
+  const publicPages = ['/pages/login', '/pages/registration']
   const authRequired = !publicPages.includes(to.path)
   const loggedIn = localStorage.getItem('user')
   // trying to access a restricted page + not logged in
