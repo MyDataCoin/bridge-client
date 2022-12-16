@@ -5,7 +5,7 @@
     </CDropdownToggle>
     <CDropdownMenu class="pt-0">
       <CDropdownHeader component="h6" class="bg-light fw-semibold py-2">
-        Settings
+        Настройки
       </CDropdownHeader>
       <!--      <CDropdownItem style="cursor: pointer">-->
       <!--        <CIcon icon="cil-user" /> Profile-->
@@ -15,7 +15,7 @@
       <!--      </CDropdownItem>-->
       <!--      <CDropdownDivider />-->
       <CDropdownItem @click="logout" style="cursor: pointer">
-        <CIcon icon="cil-lock-locked" /> Logout
+        <CIcon icon="cil-lock-locked" /> Выход
       </CDropdownItem>
     </CDropdownMenu>
   </CDropdown>

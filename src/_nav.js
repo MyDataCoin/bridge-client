@@ -1,15 +1,9 @@
 export default [
   {
     component: 'CNavItem',
-    name: 'Dashboard',
-    to: '/dashboard',
-    icon: 'cil-speedometer',
-  },
-  {
-    component: 'CNavItem',
-    name: 'Test',
-    to: '/test',
-    icon: 'cil-pencil',
+    name: 'Профиль',
+    to: '/profile',
+    icon: 'cil-user',
     badge: {
       color: 'primary',
       text: 'NEW',
