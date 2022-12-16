@@ -22,7 +22,6 @@ export default {
 
     const getBreadcrumbs = () => {
       return router.currentRoute.value.matched.map((route) => {
-        console.log(route)
         return {
           active: route.path === router.currentRoute.value.fullPath,
           name: route.name,

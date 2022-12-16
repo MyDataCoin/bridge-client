@@ -1,13 +1,13 @@
-import api from './api_login'
+import api from './api'
 import TokenService from './token.service'
 
 class AuthService {
   receive_code(email) {
-    return api.get('/users/send_code/' + email)
+    return api.get('/User/send_code/' + email)
   }
   default_login() {
     return api
-      .post('/users/auth', {
+      .post('/User/auth', {
         socialId: 'string',
         email: 'example@example.com',
         nickName: 'John Doe',
@@ -26,13 +26,14 @@ class AuthService {
 
   login({ email, code }) {
     return api
-      .post('/users/verify_code', {
+      .post('/User/verify_code', {
         email,
         code,
       })
       .then((response) => {
-        if (response.data.tokens) {
-          TokenService.setUser(response.data.tokens)
+        console.log(response)
+        if (response.status === 200) {
+          TokenService.setUser(response.data)
         }
         return response.data
       })
