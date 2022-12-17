@@ -5,6 +5,9 @@ class AuthService {
   receive_code(email) {
     return api.get('/User/send_code/' + email)
   }
+  receive_code_reg(email) {
+    return api.post('/User/registration/' + email)
+  }
   default_login() {
     return api
       .post('/User/auth', {

@@ -6,16 +6,16 @@
           <CCard class="p-4">
             <CCardBody>
               <CForm>
-                <ul class="nav nav-fill nav-pills mb-5">
+                <ul class="nav nav-fill nav-pills mb-5" role="navigation">
                   <li class="nav-item">
-                    <a class="active nav-link" aria-current="page" href="#">
+                    <button class="nav-link" type="button" @click="goLog">
                       Авторизация
-                    </a>
+                    </button>
                   </li>
                   <li class="nav-item">
-                    <button class="nav-link" type="button" @click="goReg">
+                    <a class="active nav-link" aria-current="page" href="#">
                       Регистрация
-                    </button>
+                    </a>
                   </li>
                 </ul>
                 <div class="mb-3">
@@ -86,8 +86,8 @@ const model = reactive({
 
 const loggedIn = computed(() => store.state.auth.status.loggedIn)
 
-function goReg() {
-  router.push({ name: 'Регистрация' })
+function goLog() {
+  router.push({ name: 'Вход' })
 }
 
 async function handleLogin() {
@@ -102,20 +102,20 @@ async function handleLogin() {
 
 async function receiveCode() {
   loading.value = true
-  AuthService.receive_code(model.email).then(
+  AuthService.receive_code_reg(model.email).then(
     (response) => {
       console.log(response)
       if (response.status === 200) {
         codeSent.value = true
       } else {
-        alert('Пользователь с такой почтой не найден!')
+        alert('Возникли ошибки при регистрации!')
       }
       loading.value = false
     },
     (error) => {
       console.log(error)
       loading.value = false
-      alert('Пользователь с такой почтой не найден!')
+      alert('Возникли ошибки при регистрации!')
     },
   )
 }
