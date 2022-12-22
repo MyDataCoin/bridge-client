@@ -85,6 +85,22 @@ async function getCountryList() {
   return { list, hasResponse }
 }
 
+async function getUsers() {
+  return await $api.post('/User/list')
+}
+
+async function userUpTomanager(userId) {
+  return await $api.post(
+    '/User/UpToManager',
+    {},
+    {
+      params: {
+        userId: userId,
+      },
+    },
+  )
+}
+
 export default {
   getProviders,
   getProviderById,
@@ -93,4 +109,6 @@ export default {
   getRewardCategoryList,
   getCountryList,
   deleteProvider,
+  getUsers,
+  userUpTomanager,
 }
