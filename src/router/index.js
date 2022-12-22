@@ -46,6 +46,11 @@ const routes = [
         component: () => import('@/views/pages/Login'),
       },
       {
+        path: 'registration',
+        name: 'Регистрация',
+        component: () => import('@/views/pages/Registration'),
+      },
+      {
         path: '500',
         name: 'Ошибка сервера',
         component: () => import('@/views/pages/Page500'),
