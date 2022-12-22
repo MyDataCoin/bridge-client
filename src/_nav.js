@@ -4,10 +4,18 @@ export default [
     name: 'Профиль',
     to: '/profile',
     icon: 'cil-user',
+    permission: ['User'],
     badge: {
       color: 'primary',
       text: 'NEW',
     },
+  },
+  {
+    component: 'CNavItem',
+    name: 'Пользователи',
+    to: '/users',
+    icon: 'cil-user',
+    permission: ['Administrator'],
   },
   // {
   //   component: 'CNavTitle',

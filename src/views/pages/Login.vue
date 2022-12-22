@@ -5,7 +5,7 @@
         <CCol :md="8">
           <CCard class="p-4">
             <CCardBody>
-              <CForm>
+              <CForm @submit.prevent="!codeSent ? receiveCode : handleLogin">
                 <ul class="nav nav-fill nav-pills mb-5">
                   <li class="nav-item">
                     <a class="active nav-link" aria-current="page" href="#">
@@ -95,6 +95,8 @@ async function handleLogin() {
   const resp = await store.dispatch('auth/login', model)
   if (resp.code === 200) {
     router.push({ name: 'Главная' })
+  } else {
+    alert('Ошибки при авторизации!')
   }
 
   loading.value = false

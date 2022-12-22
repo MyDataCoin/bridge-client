@@ -1,26 +1,27 @@
 import { h, resolveComponent } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
+import store from '@/store'
 
 const routes = [
   {
     path: '/',
     name: 'Главная',
     component: () => import('@/layouts/DefaultLayout'),
-    redirect: '/profile',
     children: [
       {
         path: '/profile',
         name: 'Профиль',
+        permission: ['User'],
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         component: () => import('@/views/profile/Main.vue'),
       },
       {
-        path: '/test',
-        name: 'Test',
-        nameRu: 'Тест',
-        component: () => import('@/views/test/test.vue'),
+        path: '/users',
+        name: 'Пользователи',
+        permission: ['Administrator'],
+        component: () => import('@/views/users/UserList.vue'),
       },
     ],
   },
@@ -54,6 +55,16 @@ const routes = [
         name: 'Ошибка сервера',
         component: () => import('@/views/pages/Page500'),
       },
+      {
+        path: 'registration',
+        name: 'Регистрация',
+        component: () => import('@/views/pages/Registration'),
+      },
+      {
+        path: '403',
+        name: 'Нет доступа',
+        component: () => import('@/views/pages/Page403'),
+      },
     ],
   },
 ]
@@ -68,15 +79,55 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const publicPages = ['/pages/login', '/pages/registration']
+  const publicPages = [
+    '/pages/login',
+    '/pages/registration',
+    '/pages/404',
+    '/pages/403',
+    '/pages/500',
+  ]
   const authRequired = !publicPages.includes(to.path)
   const loggedIn = localStorage.getItem('user')
-  // trying to access a restricted page + not logged in
-  // redirect to login page
+  const path = to.path
+  let perm = null
+
+  routes[0].children.forEach((item) => {
+    if (item.path === path) {
+      perm = item.permission
+    } else {
+      let tempPath = path.split('/')
+      tempPath.pop()
+      let edited = ''
+      tempPath.forEach((item) => {
+        edited += item + '/'
+      })
+      edited += ':id'
+
+      if (item.path === edited) {
+        perm = item.permission
+      }
+    }
+  })
+
   if (authRequired && !loggedIn) {
     next('/pages/login')
   } else {
-    next()
+    if (loggedIn && store.state.auth.user.role !== null) {
+      const role = JSON.parse(JSON.stringify(store.state.auth.user.role))
+      if (perm != null) {
+        if (String(role) === String(perm)) {
+          next()
+        } else {
+          next({
+            name: 'Нет доступа',
+          })
+        }
+      } else {
+        next()
+      }
+    } else {
+      next()
+    }
   }
 })
 
