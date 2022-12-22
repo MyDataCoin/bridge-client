@@ -6,7 +6,6 @@
           <CCard class="p-4">
             <CCardBody>
               <CForm @submit.prevent="!codeSent ? receiveCode : handleLogin">
-
                 <ul class="nav nav-fill nav-pills mb-5">
                   <li class="nav-item">
                     <a class="active nav-link" aria-current="page" href="#">
