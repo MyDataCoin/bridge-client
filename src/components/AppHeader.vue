@@ -5,6 +5,9 @@
         <CIcon icon="cil-menu" size="lg" />
       </CHeaderToggler>
       <CHeaderNav>
+        <AppUserEmail />
+      </CHeaderNav>
+      <CHeaderNav>
         <AppHeaderDropdownAccnt />
       </CHeaderNav>
     </CContainer>
@@ -19,9 +22,11 @@
 import AppBreadcrumb from './AppBreadcrumb'
 import AppHeaderDropdownAccnt from './AppHeaderDropdownAccnt'
 import { logo } from '@/assets/brand/logo'
+import AppUserEmail from './AppUserEmail'
 export default {
   name: 'AppHeader',
   components: {
+    AppUserEmail,
     AppBreadcrumb,
     AppHeaderDropdownAccnt,
   },

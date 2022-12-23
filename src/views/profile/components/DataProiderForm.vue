@@ -1,9 +1,9 @@
 <template>
   <CCard class="mb-3">
     <CCardHeader>
-      <strong class="me-3">Держатель данных</strong>
+      <strong class="me-3">Данные организации</strong>
       <CTooltip
-        content="Создать держателя данных"
+        content="Добавить данные организации"
         placement="right"
         v-if="!hasDataProvider && !isEditing"
       >
@@ -20,7 +20,7 @@
         </template>
       </CTooltip>
       <CTooltip
-        content="Изменить держателя данных"
+        content="Изменить данные организации"
         placement="right"
         v-if="hasDataProvider && !isEditing"
       >
@@ -37,7 +37,7 @@
         </template>
       </CTooltip>
       <CTooltip
-        content="Удалить держателя данных"
+        content="Удалить данные организации"
         placement="right"
         v-if="hasDataProvider && !isEditing"
       >
@@ -107,7 +107,7 @@
           ></Select2>
         </CCol>
         <CCol md="6">
-          <label class="form-label">Страны</label>
+          <label class="form-label">Страна</label>
           <CFormSelect
             v-model="model.countries"
             :options="countriesOpt"
@@ -125,7 +125,7 @@
       </form>
       <div class="row" v-else>
         <CCol md="12" class="text-center">
-          <h6>(У вас нет держателя данных)</h6>
+          <h6>(У вас нет данных организации)</h6>
         </CCol>
       </div>
     </CCardBody>
