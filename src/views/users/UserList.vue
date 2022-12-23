@@ -5,7 +5,7 @@
         <CCardHeader>
           <strong>Пользователи</strong>
         </CCardHeader>
-        <CCardBody>
+        <CCardBody class="p-0">
           <EasyDataTable :headers="headers" :items="items" alternating>
             <template #item-isVerified="item">
               <div class="text-success" v-if="item.isVerified">

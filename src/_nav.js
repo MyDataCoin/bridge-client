@@ -17,6 +17,13 @@ export default [
     icon: 'cil-user',
     permission: ['Administrator'],
   },
+  {
+    component: 'CNavItem',
+    name: 'Держатели данных',
+    to: '/providers',
+    icon: 'cil-user',
+    permission: ['Manager'],
+  },
   // {
   //   component: 'CNavTitle',
   //   name: 'Theme',
