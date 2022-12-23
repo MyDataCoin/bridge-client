@@ -23,6 +23,12 @@ const routes = [
         permission: ['Administrator'],
         component: () => import('@/views/users/UserList.vue'),
       },
+      {
+        path: '/providers',
+        name: 'Держатели данных',
+        permission: ['Manager'],
+        component: () => import('@/views/data_providers/DataProviderList.vue'),
+      },
     ],
   },
   {

@@ -101,6 +101,10 @@ async function userUpTomanager(userId) {
   )
 }
 
+async function verifyProvider(bridgeUserEmail) {
+  return await $api.post('/User/verify/' + bridgeUserEmail)
+}
+
 export default {
   getProviders,
   getProviderById,
@@ -111,4 +115,5 @@ export default {
   deleteProvider,
   getUsers,
   userUpTomanager,
+  verifyProvider,
 }
