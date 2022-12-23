@@ -29,9 +29,8 @@ import avatar from '@/assets/images/avatars/user.png'
 const store = useStore()
 const router = useRouter()
 
-function logout() {
-  store.dispatch('auth/logout').then(() => {
-    router.push('/pages/login')
-  })
+async function logout() {
+  await store.dispatch('auth/logout')
+  await router.push('/pages/login')
 }
 </script>

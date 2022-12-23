@@ -6,7 +6,14 @@
           <strong>Пользователи</strong>
         </CCardHeader>
         <CCardBody class="p-0">
-          <EasyDataTable :headers="headers" :items="items" alternating>
+          <EasyDataTable
+            :headers="headers"
+            :items="items"
+            :empty-message="'Данные отсутствуют'"
+            :rows-of-page-separator-message="'из'"
+            :rows-per-page-message="'Показывать по'"
+            alternating
+          >
             <template #item-isVerified="item">
               <div class="text-success" v-if="item.isVerified">
                 Верифицирован
@@ -24,7 +31,7 @@
               <div v-if="item.role === 2">
                 <button
                   class="btn btn-sm btn-primary"
-                  @click="upUserToManager(item.id)"
+                  @click="upUserToManagerModalOpen(item)"
                 >
                   Назначить менеджером
                 </button>
@@ -36,6 +43,25 @@
       </CCard>
     </CCol>
   </CRow>
+  <CModal
+    alignment="center"
+    backdrop="static"
+    :visible="upToManagerModalOpen"
+    @close="upUserToManagerModalClose"
+  >
+    <CModalHeader>
+      <CModalTitle>Назначение менеджером</CModalTitle>
+    </CModalHeader>
+    <CModalBody>
+      Вы действительно хотите назначить данного пользователя менеджером?
+    </CModalBody>
+    <CModalFooter>
+      <CButton color="light" @click="upUserToManagerModalClose">
+        Отмена
+      </CButton>
+      <CButton color="primary" @click="upUserToManager">Подтвердить</CButton>
+    </CModalFooter>
+  </CModal>
 </template>
 
 <script setup>
@@ -52,6 +78,8 @@ const headers = ref([
 ])
 
 const items = ref([])
+const upToManagerModalOpen = ref(false)
+const currentUser = ref(null)
 
 async function getUsers() {
   items.value = []
@@ -65,11 +93,22 @@ async function getUsers() {
   )
 }
 
-async function upUserToManager(userId) {
-  ProviderService.userUpTomanager(userId).then(
+function upUserToManagerModalOpen(user) {
+  upToManagerModalOpen.value = true
+  currentUser.value = user
+}
+
+function upUserToManagerModalClose() {
+  upToManagerModalOpen.value = false
+  currentUser.value = null
+}
+
+async function upUserToManager() {
+  ProviderService.userUpTomanager(currentUser.value.id).then(
     (response) => {
       if (response.status === 200) {
         getUsers()
+        upUserToManagerModalClose()
       }
     },
     (error) => {
