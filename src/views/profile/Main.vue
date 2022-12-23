@@ -1,7 +1,4 @@
 <template>
-  <div class="mb-3">
-    <h2>Добро пожаловать в профиль!</h2>
-  </div>
   <CRow>
     <CCol :xs="12">
       <CCard class="mb-3">

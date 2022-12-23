@@ -13,8 +13,13 @@ export const auth = {
     login({ commit }, model) {
       return AuthService.login(model).then(
         (response) => {
-          commit('loginSuccess', response)
-          return Promise.resolve(response)
+          if (response.code === 200) {
+            commit('loginSuccess', response)
+            return Promise.resolve(response)
+          } else {
+            commit('loginFailure')
+            return Promise.reject(response)
+          }
         },
         (error) => {
           commit('loginFailure')
