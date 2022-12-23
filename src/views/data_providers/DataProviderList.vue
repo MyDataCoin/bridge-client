@@ -60,7 +60,7 @@
                     <button
                       v-if="!item.isVerified"
                       class="btn btn-sm btn-primary ms-2"
-                      @click="verifyProvider(item.bridgeUserEmail)"
+                      @click="verifyModalOpenFunc(item.bridgeUserEmail)"
                     >
                       Верифицировать
                     </button>
@@ -85,6 +85,23 @@
       </CCard>
     </CCol>
   </CRow>
+  <CModal
+    alignment="center"
+    backdrop="static"
+    :visible="verifyModalOpen"
+    @close="verifyModalCloseFunc"
+  >
+    <CModalHeader>
+      <CModalTitle>Подтверждение держателя данных</CModalTitle>
+    </CModalHeader>
+    <CModalBody>
+      Вы действительно хотите подтвердить статус данного держателя данных?
+    </CModalBody>
+    <CModalFooter>
+      <CButton color="light" @click="verifyModalCloseFunc">Отмена</CButton>
+      <CButton color="primary" @click="verifyProvider">Подтвердить</CButton>
+    </CModalFooter>
+  </CModal>
 </template>
 
 <script setup>
@@ -103,6 +120,18 @@ const headers = ref([
 ])
 
 const items = ref([])
+const verifyModalOpen = ref(false)
+const currentProviderUserEmail = ref(null)
+
+function verifyModalOpenFunc(userEmail) {
+  verifyModalOpen.value = true
+  currentProviderUserEmail.value = userEmail
+}
+
+function verifyModalCloseFunc() {
+  verifyModalOpen.value = false
+  currentProviderUserEmail.value = null
+}
 
 async function getProviders() {
   items.value = []
@@ -116,11 +145,12 @@ async function getProviders() {
   )
 }
 
-async function verifyProvider(bridgeUserEmail) {
-  ProviderService.verifyProvider(bridgeUserEmail).then(
+async function verifyProvider() {
+  ProviderService.verifyProvider(currentProviderUserEmail.value).then(
     (response) => {
       if (response.status === 200) {
         getProviders()
+        verifyModalCloseFunc()
       }
     },
     (error) => {
