@@ -24,6 +24,12 @@ const routes = [
         component: () => import('@/views/users/UserList.vue'),
       },
       {
+        path: '/statistics',
+        name: 'Статистика',
+        permission: ['Administrator'],
+        component: () => import('@/views/statistics/Statistics.vue'),
+      },
+      {
         path: '/providers',
         name: 'Держатели данных',
         permission: ['Manager'],

@@ -56,7 +56,12 @@ async function getRewardCategoryList() {
     (response) => {
       list.slice(0, list.length)
       response.data.forEach((item) => {
-        list.push({ id: item.id, text: item.name })
+        list.push({
+          id: item.id,
+          text: item.name,
+          value: item.id,
+          label: item.name,
+        })
       })
       hasResponse = true
     },
@@ -105,6 +110,26 @@ async function verifyProvider(bridgeUserEmail) {
   return await $api.post('/User/verify/' + bridgeUserEmail)
 }
 
+async function sendBridgeStatistics(token, data) {
+  return await $api.post('/BridgeStatistic/add', data, {
+    params: {
+      token,
+    },
+  })
+}
+
+async function getBridgeStatisticsFromProvider(token) {
+  return await $api.get('/BridgeStatistic/getFromProvider', {
+    params: {
+      token,
+    },
+  })
+}
+
+async function getBridgeStatisticsFromAdmin() {
+  return await $api.get('/BridgeStatistic/getFromAdmin')
+}
+
 export default {
   getProviders,
   getProviderById,
@@ -116,4 +141,7 @@ export default {
   getUsers,
   userUpTomanager,
   verifyProvider,
+  sendBridgeStatistics,
+  getBridgeStatisticsFromProvider,
+  getBridgeStatisticsFromAdmin,
 }

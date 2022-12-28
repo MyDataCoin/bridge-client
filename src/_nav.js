@@ -19,6 +19,13 @@ export default [
   },
   {
     component: 'CNavItem',
+    name: 'Статистика',
+    to: '/statistics',
+    icon: 'cil-notes',
+    permission: ['Administrator'],
+  },
+  {
+    component: 'CNavItem',
     name: 'Держатели данных',
     to: '/providers',
     icon: 'cil-user',
