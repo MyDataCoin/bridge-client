@@ -13,6 +13,7 @@
             :rows-of-page-separator-message="'из'"
             :rows-per-page-message="'Показывать по'"
             alternating
+            show-index
           >
             <template #expand="item">
               <div style="padding: 15px">

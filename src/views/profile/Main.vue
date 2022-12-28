@@ -24,6 +24,7 @@
       </CCard>
 
       <DataProiderForm :token="token" />
+      <BridgeStatisticsSection :token="token" v-if="isVerified" />
     </CCol>
   </CRow>
 </template>
@@ -35,10 +36,12 @@ import { cilCopy } from '@coreui/icons'
 import { createToast } from 'mosha-vue-toastify'
 import 'mosha-vue-toastify/dist/style.css'
 import DataProiderForm from '@/views/profile/components/DataProiderForm'
+import BridgeStatisticsSection from '@/views/profile/components/BridgeStatisticsSection'
 
 const store = useStore()
 const tokenRef = ref(null)
 const token = computed(() => store.state.auth.user.token)
+const isVerified = computed(() => store.state.auth.user.isVerified)
 
 function copyToken() {
   let el = tokenRef.value.innerHTML
