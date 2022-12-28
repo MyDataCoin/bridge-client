@@ -13,6 +13,7 @@
             :rows-of-page-separator-message="'из'"
             :rows-per-page-message="'Показывать по'"
             alternating
+            show-index
           >
             <template #item-isVerified="item">
               <div class="text-success" v-if="item.isVerified">
